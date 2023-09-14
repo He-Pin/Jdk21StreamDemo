@@ -26,20 +26,20 @@ class UnfoldSource<S, T> extends Source<T> {
     }
 
     @Override
-    void close() throws Exception {
+    void close() {
         if (closeFunction != null) {
             closeFunction.accept(state);
         }
     }
 
     @Override
-    protected void onPull(StreamCollector<T> collector) {
+    protected void onPull(StreamOutHandler<T> collector) {
         if (state == null) {
             state = Objects.requireNonNull(creator.get());
         }
         var result = f.apply(state);
         if (result != null) {
-            collector.emit(result);
+            collector.onPush(result);
         } else {
             complete();
         }

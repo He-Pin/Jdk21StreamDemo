@@ -7,12 +7,12 @@ import java.util.function.Function;
  *
  * @author 虎鸣, hepin.p@alibaba-inc.com
  */
-public class FlatMapConcatFlow<T, R> extends Stream<R> implements StreamCollector<T> {
+public class FlatMapConcatFlow<T, R> extends Stream<R> implements StreamOutHandler<T> {
     private final Stream<T> upstream;
     private final Function<T, Stream<R>> f;
 
     private Stream<R> currentStream;
-    protected StreamCollector<R> downstream;
+    protected StreamOutHandler<R> downstream;
 
     private boolean upstreamHasMore = true;
 
@@ -22,11 +22,11 @@ public class FlatMapConcatFlow<T, R> extends Stream<R> implements StreamCollecto
     }
 
     @Override
-    boolean collect(StreamCollector<R> collector) {
+    boolean tryPull(StreamOutHandler<R> collector) {
         try {
             downstream = collector;
             if (currentStream != null) {
-                return currentStream.collect(collector) || switchToNext(collector);
+                return currentStream.tryPull(collector) || switchToNext(collector);
             } else {
                 return switchToNext(collector);
             }
@@ -35,16 +35,16 @@ public class FlatMapConcatFlow<T, R> extends Stream<R> implements StreamCollecto
         }
     }
 
-    private boolean switchToNext(StreamCollector<R> collector) {
+    private boolean switchToNext(StreamOutHandler<R> collector) {
         if (!upstreamHasMore) {
             return false;
         }
-        upstreamHasMore = upstream.collect(this);
+        upstreamHasMore = upstream.tryPull(this);
         return true;
     }
 
     @Override
-    public void emit(T value) {
+    public void onPush(T value) {
         currentStream = f.apply(value);
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  *
  * @author 虎鸣, hepin.p@alibaba-inc.com
  */
-public abstract class Sink<T> implements StreamCollector<T> {
+public abstract class Sink<T> implements StreamOutHandler<T> {
   private static final Executor executor = Executors.newVirtualThreadPerTaskExecutor();
 
   private final Stream<T> upstream;
@@ -19,16 +19,9 @@ public abstract class Sink<T> implements StreamCollector<T> {
     this.upstream = upstream;
   }
 
-  protected abstract void onPush(T value);
-
-  @Override
-  public void emit(T value) {
-    onPush(value);
-  }
-
   void run() {
     for (; ; ) {
-      var hasMore = upstream.collect(this);
+      var hasMore = upstream.tryPull(this);
       if (!hasMore) {
         return;
       }

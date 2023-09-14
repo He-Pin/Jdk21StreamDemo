@@ -16,12 +16,12 @@ class IterableSource<T> extends Source<T> {
     }
 
     @Override
-    protected void onPull(StreamCollector<T> collector) {
+    protected void onPull(StreamOutHandler<T> collector) {
         if (currentIterator == null) {
             currentIterator = iterable.iterator();
         }
         if (currentIterator.hasNext()) {
-            collector.emit(currentIterator.next());
+            collector.onPush(currentIterator.next());
         }
         if (!currentIterator.hasNext()) {
             complete();

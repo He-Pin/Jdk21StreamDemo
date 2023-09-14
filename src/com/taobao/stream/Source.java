@@ -17,10 +17,10 @@ public abstract class Source<T> extends Stream<T> {
         }
     }
 
-    protected abstract void onPull(final StreamCollector<T> collector);
+    protected abstract void onPull(final StreamOutHandler<T> collector);
 
     @Override
-    boolean collect(StreamCollector<T> collector) {
+    boolean tryPull(StreamOutHandler<T> collector) {
         onPull(collector);
         return !completed;
     }

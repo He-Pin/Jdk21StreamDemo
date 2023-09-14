@@ -5,6 +5,6 @@ package com.taobao.stream;
  *
  * @author 虎鸣, hepin.p@alibaba-inc.com
  */
-public interface StreamCollector<T> {
-  void emit(T value);
+public interface StreamOutHandler<T> {
+  void onPush(T value);
 }

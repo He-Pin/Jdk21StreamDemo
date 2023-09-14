@@ -17,9 +17,11 @@ public abstract class Stream<T> {
     /**
      * return ture if has more.
      */
-    abstract boolean collect(final StreamCollector<T> collector);
+    abstract boolean tryPull(final StreamOutHandler<T> collector);
 
-    void close() throws Exception {
+
+
+    void close() {
 
     }
 
@@ -45,6 +47,14 @@ public abstract class Stream<T> {
 
     public <R> Stream<R> flatMap(final Function<T, Stream<R>> f) {
         return new FlatMapConcatFlow<>(this, f);
+    }
+
+    public <R> Stream<R> mapAsyncUnordered(final int parallelism, final Function<T, R> f) {
+        return new MapAsyncUnorderedFlow<>(this, parallelism, f);
+    }
+
+    public Stream<T> async() {
+        return new AsyncIdentityFlow<>(this);
     }
 
     public <R> Stream<R> mapConcat(final Function<T, Iterable<R>> f) {
