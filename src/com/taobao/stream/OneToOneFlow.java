@@ -19,9 +19,13 @@ abstract class OneToOneFlow<T, R> extends Stream<R> implements StreamOutHandler<
 
   @Override
   public void onPush(T value) {
-    final R r = transform(value);
-    if (r != null) {
-      downstream.onPush(r);
+    try {
+      final R r = transform(value);
+      if (r != null) {
+        downstream.onPush(r);
+      }
+    } catch (Throwable e) {
+      e.printStackTrace();
     }
   }
 

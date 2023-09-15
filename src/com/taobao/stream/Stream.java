@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.BaseStream;
+import java.util.stream.IntStream;
 
 /**
  * TODO: description of this file
@@ -39,6 +40,10 @@ public abstract class Stream<T> {
 
     public static <T> Stream<T> fromJavaStream(final BaseStream<T, ? extends BaseStream<T, ?>> javaStream) {
         return new JavaStreamSource<>(javaStream);
+    }
+
+    public static Stream<Integer> rangeClosed(final int start, final int end) {
+        return fromJavaStream(IntStream.rangeClosed(start, end));
     }
 
     public <R> Stream<R> map(final Function<T, R> f) {
