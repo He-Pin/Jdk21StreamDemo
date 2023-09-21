@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 class IterableSource<T> extends Source<T> {
     private final Iterable<T> iterable;

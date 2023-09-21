@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 public class MapAsyncFlowTest {
     public static void main(String[] args) {

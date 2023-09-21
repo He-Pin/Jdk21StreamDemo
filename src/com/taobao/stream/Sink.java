@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 public abstract class Sink<T> implements StreamOutHandler<T> {
   private static final Executor executor = Executors.newVirtualThreadPerTaskExecutor();

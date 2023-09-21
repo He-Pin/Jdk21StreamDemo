@@ -10,7 +10,7 @@ import java.util.function.Function;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 public class MapAsyncUnorderedFlow<T, R> extends Stream<R> implements StreamOutHandler<T> {
     private static final Executor executor = Executors.newVirtualThreadPerTaskExecutor();

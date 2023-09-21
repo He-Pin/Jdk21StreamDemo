@@ -6,7 +6,7 @@ import java.util.stream.BaseStream;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 class JavaStreamSource<T> extends Source<T> {
     private final BaseStream<T, ? extends BaseStream<T, ?>> javaStream;

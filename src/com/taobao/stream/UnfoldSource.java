@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 class UnfoldSource<S, T> extends Source<T> {
     private final Supplier<S> creator;

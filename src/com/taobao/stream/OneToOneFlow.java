@@ -4,7 +4,7 @@ package com.taobao.stream;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 abstract class OneToOneFlow<T, R> extends Stream<R> implements StreamOutHandler<T> {
   private final Stream<T> upstream;

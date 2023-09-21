@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 class FilterFlow<T> extends OneToOneFlow<T, T> {
   private final Predicate<T> predicate;

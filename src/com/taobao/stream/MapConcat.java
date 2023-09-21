@@ -6,7 +6,7 @@ import java.util.function.Function;
 /**
  * TODO: description of this file
  *
- * @author 虎鸣, hepin.p@alibaba-inc.com
+ * @author hepin, hepin1989@gmail.com
  */
 class MapConcat<T, R> extends Stream<R> implements StreamOutHandler<T> {
     private final Stream<T> upstream;
